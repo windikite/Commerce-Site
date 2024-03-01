@@ -1,0 +1,49 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>{{auction.auctionName}}</h2>
+    <h4>Starting Price: {{auction.startingPrice}}</h4>
+    <h4>Listed by: {{auction.creator}}</h4>
+    <hr>
+    <h4>Watchers</h4>
+    {% if watching == True %}
+        <form action="{% url 'unwatch' auction.id %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" value="{{user.username}}" name="username">
+            <input type="submit" value="Unwatch">
+            <hr>
+        </form>
+    {% elif watching == False %}    
+        <form action="{% url 'watch' auction.id %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" value="{{user.username}}" name="username">
+            <input type="submit" value="Watch Item">
+            <hr>
+        </form>
+    {% endif %}
+    <ul>
+        {% for watcher in watchers %}
+            <li>
+                {{watcher}}
+            </li>
+        {% endfor %}
+    </ul>
+    <hr>
+    <h4>Comments</h4>
+    <form action="{% url 'addComment' auction.id %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" value="{{user.username}}" name="username">
+        <textarea rows="5" cols="33" name="commentText">
+        </textarea>
+        <input type="submit" value="Save">
+        <hr>
+    </form>
+    <ul>
+        {% for comment in comments %}
+            <li>
+                {{comment}}
+            </li>
+        {% endfor %}
+    </ul>
+    
+{% endblock %}

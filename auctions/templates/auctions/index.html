@@ -1,0 +1,18 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+
+    <ul>
+        {% for auction in activeAuctions %}
+            <li>
+                <a href="{% url 'auction' auction.id %}">{{auction}}</a>
+                <br>
+                <p>Listed by {{auction.creator}} for {{auction.startingPrice}}</p>
+                <!-- <p>Highest bid: {{auction.bids.}}</p> -->
+            </li>
+            <hr>
+        {% endfor %}
+    </ul>
+    
+{% endblock %}

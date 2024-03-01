@@ -1,0 +1,19 @@
+body {
+    padding: 10px;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+    width: 70vw;
+    text-decoration: none;
+    
+}
+
+ul{
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+}
+
+li{
+    list-style-type: none;
+}
